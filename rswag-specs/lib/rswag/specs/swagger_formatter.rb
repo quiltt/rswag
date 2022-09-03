@@ -62,7 +62,10 @@ module Rswag
                     value[:requestBody][:required] = true if schema_param[:required]
                     value[:requestBody][:description] = schema_param[:description] if schema_param[:description]
                     mime_list.each do |mime|
-                      value[:requestBody][:content][mime] = { schema: schema_param[:schema] }
+                      # @todo: Add test and submit PR for example/examples functionality
+                      value[:requestBody][:content][mime] = schema_param.slice(
+                        :schema, :example, :examples
+                      )
                     end
                   end
 
